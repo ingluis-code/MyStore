@@ -1,0 +1,46 @@
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+    <h3>
+        <!--ara hacer que cada nombre de producto sea un enlace a los detalles del producto, agregue el <a>elemento alrededor de {{ product.name }}.-->
+        <a [title]="product.name + ' details'" [routerLink]="['/products', product.id]">
+            
+            {{ product.name }}
+        </a>
+    </h3>
+
+    <!--Añade las descripciones de los productos. En un <p>elemento, use una directiva para que Angular 
+        solo cree el elemento si el producto actual tiene una descripción.*ngIf<p>-->
+    <p *ngIf="product.description">
+        Description: {{ product.description }}
+    </p>     
+    
+    <!--Agregue un botón para que los usuarios puedan compartir un producto. Vincule el clickevento del botón al share()método en product-list.component.ts. 
+    La vinculación de eventos utiliza un conjunto de paréntesis ( )alrededor del evento, como en el (click)evento del <button>elemento.
+    -->
+    <button type="button" (click)="share()">
+        Share
+    </button>
+
+    <!--Finalmente, para mostrar ProductAlertsComponentcomo elemento secundario de ProductListComponent, 
+        agregue el <app-product-alerts>elemento a product-list.component.html. 
+        Pase el producto actual como entrada al componente mediante el enlace de propiedades.
+    -->
+
+    <app-product-alerts [product]="product" (notify)="onNotify()"> </app-product-alerts>
+
+    <!--El componente de alerta de nuevo producto toma un producto como entrada de la lista de productos.
+         Con esa entrada, muestra u oculta el botón Notificarme , según el precio del producto. El precio del Phone XL supera los $700, 
+        por lo que el botón Notificarme aparece en ese producto.
+    -->
+
+    <!--Actualice el ProductListComponentpara recibir datos del ProductAlertsComponent.
+        En product-list.component.html, enlace <app-product-alerts> al onNotify()método 
+        del componente de la lista de productos. <app-product-alerts> es lo que muestra
+        el botón Notificarme .
+
+        Se actualiza la linea 29
+    -->
+
+    
+</div>

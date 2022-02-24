@@ -1,0 +1,38 @@
+import { Injectable } from '@angular/core';
+import { Product } from './produts';
+
+/*
+En cart.service.ts, importar HttpClient desde el paquete. @angular/common/http
+*/
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CartService {
+
+  items: Product[] = [];
+
+   /*
+  Inyectar HttpClienten el CartService constructor().
+  */
+
+  constructor(private http: HttpClient) { }
+
+  addToCart(product: Product) {
+    this.items.push(product);
+  }
+
+  getItems() {
+    return this.items;
+  }
+
+  clearCart() {
+    this.items = [];
+    return this.items;
+  }
+
+  getShippingPrices() {
+    return this.http.get<{type: string, price: number}[]>('/assets/shipping.json');
+  }
+}

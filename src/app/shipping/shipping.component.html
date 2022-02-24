@@ -1,0 +1,11 @@
+<h3>Shipping Prices</h3>
+
+<div class="shipping-item" *ngFor="let shipping of shippingCosts | async">
+  <span>{{ shipping.type }}</span>
+  <span>{{ shipping.price | currency }}</span>
+</div>
+
+
+<!--La asynccanalización devuelve el valor más reciente de un flujo de datos y continúa
+    haciéndolo durante la vida útil de un componente determinado. 
+    Cuando Angular destruye ese componente, la asynctubería se detiene automáticamente.-->
